@@ -5,11 +5,21 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { DetailsComponent } from './components/details/details.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DetailsComponent,
+    AdminComponent,
+    NotfoundComponent,
+    CheckoutComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,

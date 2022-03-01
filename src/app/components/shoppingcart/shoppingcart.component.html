@@ -1,0 +1,15 @@
+<section>
+  <h2>Varukorg</h2>
+  <article *ngFor="let p of products">
+    <!-- <a routerLink="/ckeckout"></a> -->
+    <img [src]="p.imageUrl" alt="product" width="80px" height="auto">
+    <h3>{{p.name}} </h3>
+    <h4> {{p.price}} K </h4>
+    <div>
+      <p>m: {{amountNu}} </p>
+      <button  (click)="plus()">+</button>
+      <button (click)="minus()">-</button>
+    </div>
+  </article>
+</section>
+

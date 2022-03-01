@@ -1,6 +1,8 @@
-<div *ngFor="let p of products ">
-  <h3>{{ p.name }}</h3>
-  <img [src]="p.imageUrl" alt="products" width="150px" height="auto">
-  <p>Added {{ p.added }}</p>
-</div>
+<section>
+  <article *ngFor="let p of products">
+    <a routerLink="/details/{{p.id}}"><img [src]="p.imageUrl" alt="products" width="130px" height="auto">
+    <h2>{{p.name}} </h2></a>
+    <button (click)="saveProduct(p)">Lägg i varukorg</button>
+  </article>
+</section>
 

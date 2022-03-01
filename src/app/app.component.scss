@@ -1,0 +1,21 @@
+header {
+  nav {
+    ul{
+      list-style: none;
+      padding: 0%;
+      margin: 0%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+
+      li {
+        text-decoration: none;
+      }
+
+    }
+  }
+}
+
+main {
+  text-align: center;
+}

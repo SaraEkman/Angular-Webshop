@@ -1,0 +1,28 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  // max-width: 100%;
+
+  article {
+    width: 25%;
+    background-color: aliceblue;
+    margin: 8px;
+    padding-top: 8px;
+
+    a {
+      // width: 33.3%;
+      text-decoration: none;
+      color: black;
+    }
+
+    button {
+      width: 70%;
+      padding: 8px;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
+}

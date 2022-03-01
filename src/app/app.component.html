@@ -1,1 +1,22 @@
-<app-home></app-home>
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="">Hem</a>
+      </li>
+      <li>
+        <a routerLink="/shoppingcart">Varukorg {{totalProductNu}}</a>
+      </li>
+      <li>
+        <a routerLink="/checkout">Checka ut</a>
+      </li>
+      <li>
+        <a routerLink="/admin">Admin</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

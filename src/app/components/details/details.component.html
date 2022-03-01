@@ -1,0 +1,8 @@
+<article>
+  <img [src]="product.imageUrl" alt="product" width="600px" height="600px">
+  <h1>{{ product.name }}</h1>
+  <h2> År: {{ product.year }} </h2>
+  <h3> beskrivning: {{product.description}} </h3>
+  <h4> Prist: {{product.price}}</h4>
+  <button (click)="saveId()">Lägga till i varukorg </button>
+</article>
