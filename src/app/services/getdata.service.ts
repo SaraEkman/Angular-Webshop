@@ -22,9 +22,4 @@ export class GetdataService {
       localStorage.setItem('Products', JSON.stringify(data))
     })
   }
-  // getTotalNu() {
-  //   let num = JSON.parse(localStorage.getItem('amountNu') || '[]');
-  //   if (num)
-  //     this.totalProductsNu = num;
-  // }
 }

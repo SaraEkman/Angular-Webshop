@@ -8,14 +8,5 @@ import { GetdataService } from './services/getdata.service';
 })
 export class AppComponent {
   title = 'Angular-Webshop';
-
-  totalProductNu: number = 0;
-  constructor(private service: GetdataService) {
-  }
-  ngOnInit() {
-    // this.service.getTotalNu()
-    // this.totalProductNu = this.service.totalProductsNu;
-    // console.log(this.totalProductNu);
-  }
-
+  totalPNu: number = JSON.parse(localStorage.getItem('totalPNums')||'[]')
 }

@@ -1,15 +1,18 @@
 <section>
   <h2>Varukorg</h2>
-  <article *ngFor="let p of products">
+  <article *ngFor="let p of products let i = index">
     <!-- <a routerLink="/ckeckout"></a> -->
     <img [src]="p.imageUrl" alt="product" width="80px" height="auto">
     <h3>{{p.name}} </h3>
-    <h4> {{p.price}} K </h4>
+    <h4> {{p.price}} K</h4>
     <div>
-      <p>m: {{amountNu}} </p>
-      <button  (click)="plus()">+</button>
-      <button (click)="minus()">-</button>
+      <input type="number" #num >
+      <div>
+      <button  (click)="plus(p.price, +num.value)">˄</button>
+      <button (click)="minus(p.price, +num.value)">˅</button>
+      </div>
     </div>
+    <button (click)="removeP(i)">Ta bort</button>
   </article>
 </section>
 

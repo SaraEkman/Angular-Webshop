@@ -9,8 +9,8 @@ import { GetdataService } from 'src/app/services/getdata.service'
 })
 export class HomeComponent implements OnInit {
   products: IProduct[] = []
-  LSProducts: IProduct[] = [];
-  amount: number = 0;
+  orderP: IProduct[] = []
+  amount: number = 0
 
   constructor(private service: GetdataService) {}
 
@@ -18,24 +18,28 @@ export class HomeComponent implements OnInit {
     this.service.getData()
     // this.service.theData$.subscribe((data)=> this.products = data)
     if (localStorage.getItem('Products')) {
-      let productsArr: string = localStorage.getItem('Products') || '[]'
-      console.log(JSON.parse(productsArr))
-      this.products = JSON.parse(productsArr)
+      this.products = this.getFromLocalStorage('Products');
     }
 
-    // if (localStorage.getItem('amountNu')) {
-    //   let nums: string = localStorage.getItem('amountNu') || '[]'
-    //   this.amount = JSON.parse(nums)
-    // }
+    if (localStorage.getItem('Order')) {
+      this.orderP = this.getFromLocalStorage('Order')
+    }
+
+    if (localStorage.getItem('totalPNums')) {
+      this.amount = this.getFromLocalStorage('totalPNums')
+    }
   }
 
-
   saveProduct(p: IProduct) {
-    this.LSProducts.push(p);
-    console.log(this.LSProducts);
-    localStorage.setItem('Order', JSON.stringify(this.LSProducts));
-    this.amount += 1;
-    console.log(this.amount);
-    // localStorage.setItem('amountNu', JSON.stringify(this.amount))
+    this.orderP.push(p)
+    console.log(this.orderP)
+    localStorage.setItem('Order', JSON.stringify(this.orderP))
+    this.amount += +1
+    console.log(this.amount)
+    localStorage.setItem('totalPNums', JSON.stringify(this.amount))
+  }
+
+  getFromLocalStorage(name: string) {
+    return JSON.parse(localStorage.getItem(name) || '[]')
   }
 }
