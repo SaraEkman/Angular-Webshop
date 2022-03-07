@@ -1,18 +1,109 @@
 <section>
   <h2>Varukorg</h2>
   <article *ngFor="let p of products let i = index">
-    <!-- <a routerLink="/ckeckout"></a> -->
     <img [src]="p.imageUrl" alt="product" width="80px" height="auto">
     <h3>{{p.name}} </h3>
     <h4> {{p.price}} K</h4>
-    <div>
-      <input type="number" #num >
-      <div>
-      <button  (click)="plus(p.price, +num.value)">˄</button>
-      <button (click)="minus(p.price, +num.value)">˅</button>
-      </div>
-    </div>
-    <button (click)="removeP(i)">Ta bort</button>
+    <button (click)="removeP(i,p)">Ta bort</button>
   </article>
+  <p>Totalt, att betala {{Price}}</p>
+  <button (click)="showUserForm()" *ngIf=" products.length > 0">Fotsätt</button>
 </section>
 
+<section *ngIf="done">
+  <form [formGroup]="userForm" (ngSubmit)="handleChange()">
+    <input id="firstname" type="text" formControlName="firstName" placeholder="Förnamn">
+
+    <div
+      *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched || userForm.get('firstName')?.dirty">
+      <div *ngIf="userForm.get('firstName')?.errors?.['required']">Obligatoriskt</div>
+      <div *ngIf="userForm.get('firstName')?.errors?.['minlength']">Minst två tecken</div>
+    </div>
+
+    <input id="lastname" type="text" formControlName="lastName" placeholder="Efternamn">
+
+    <div
+      *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched || userForm.get('lastName')?.dirty">
+      <div *ngIf="userForm.get('lastName')?.errors?.['required']">Obligatoriskt</div>
+      <div *ngIf="userForm.get('lastName')?.errors?.['minlength']">Minst två tecken</div>
+    </div>
+
+    <input id="street" type="text" formControlName="street" placeholder="Gata">
+
+    <div
+      *ngIf="userForm.get('street')?.invalid && userForm.get('street')?.touched || userForm.get('street')?.dirty">
+      <div *ngIf="userForm.get('street')?.errors?.['required']">Obligatoriskt</div>
+      <div *ngIf="userForm.get('street')?.errors?.['minlength']">Minst tre tecken</div>
+    </div>
+
+    <input id="zip" type="text" formControlName="zip" placeholder="Postnummer">
+
+    <div
+      *ngIf="userForm.get('zip')?.invalid && userForm.get('zip')?.touched || userForm.get('zip')?.dirty">
+      <div *ngIf="userForm.get('zip')?.errors?.['required']">Obligatoriskt</div>
+      <div *ngIf="userForm.get('zip')?.errors?.['minlength']">Minst fem tecken</div>
+    </div>
+
+    <input id="city" type="text" formControlName="city" placeholder="Stad">
+
+    <div
+      *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched || userForm.get('city')?.dirty">
+      <div *ngIf="userForm.get('city')?.errors?.['required']">Obligatoriskt</div>
+      <div *ngIf="userForm.get('city')?.errors?.['minlength']">Minst två tecken</div>
+    </div>
+
+    <input id="country" type="text" formControlName="country" placeholder="Land">
+
+    <div
+      *ngIf="userForm.get('country')?.invalid && userForm.get('country')?.touched || userForm.get('country')?.dirty">
+      <div *ngIf="userForm.get('country')?.errors?.['required']">Obligatoriskt</div>
+      <div *ngIf="userForm.get('country')?.errors?.['minlength']">Minst två tecken</div>
+    </div>
+
+    <input id="phoneNum" type="text" formControlName="phoneNum" placeholder="Telefonnummer">
+
+    <div
+      *ngIf="userForm.get('phoneNum')?.invalid && userForm.get('phoneNum')?.touched || userForm.get('phoneNum')?.dirty">
+      <div *ngIf="userForm.get('phoneNum')?.errors?.['required']">Obligatoriskt</div>
+      <div *ngIf="userForm.get('phoneNum')?.errors?.['minlength']">Minst tio tecken</div>
+    </div>
+
+    <input id="email" type="text" formControlName="email" placeholder="Email">
+
+    <div
+      *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched || userForm.get('email')?.dirty">
+      <div *ngIf="userForm.get('email')?.errors?.['required']">Obligatoriskt</div>
+      <div *ngIf="userForm.get('email')?.errors?.['minlength']">Minst två tecken</div>
+    </div>
+
+    <button type="submit"[disabled]="!userForm.valid">Spara</button>
+
+  </form>
+</section>
+<a routerLink="/checkout" *ngIf="show"><button>checka ut</button></a>
+
+
+
+
+
+<!-- <p>
+  {{userForm.value | json}}
+</p>
+
+
+<p>
+  {{orderProds|json}}
+</p> -->
+
+<!-- <div> -->
+  <!-- <input type="number" #num > -->
+  <!-- <div *ngFor="let el of countArr">
+    <p *ngIf="el.ProductId === p.id">
+      {{el.startValue}}
+    </p>
+  </div>
+  <div>
+    <button (click)="plus(p.id, i)">˄</button>
+    <button (click)="minus(p.price)">˅</button>
+  </div> -->
+<!-- </div> -->

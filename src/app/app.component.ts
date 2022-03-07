@@ -8,5 +8,9 @@ import { GetdataService } from './services/getdata.service';
 })
 export class AppComponent {
   title = 'Angular-Webshop';
-  totalPNu: number = JSON.parse(localStorage.getItem('totalPNums')||'[]')
+  totalPNu: number = JSON.parse(localStorage.getItem('totalPNums') || '[]')
+
+  constructor(private service: GetdataService) {
+    this.service.$amountNum.subscribe((num)=>{this.totalPNu = num})
+  }
 }

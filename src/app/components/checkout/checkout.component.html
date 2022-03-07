@@ -1,1 +1,19 @@
-<p>checkout works!</p>
+<section *ngFor="let order of finishedOrder">
+  <article *ngIf="order.createdBy === user.firstName">
+
+    <h1>Din Ordernummer är {{order.id}} </h1>
+    <h2> {{order.createdBy}} </h2>
+    <article *ngFor="let row of order.orderRows">
+
+      {{row.productId}}
+      <article *ngFor="let p of products">
+        <div *ngIf="p.id === row.productId">
+          <img [src]="p.imageUrl" alt="product" width="auto" height="80px">
+          <p>productId: {{p.id}}</p>
+          <p>Product: {{p.name}}</p>
+          <p>Product: {{p.price}}</p>
+        </div>
+      </article>
+    </article>
+  </article>
+</section>

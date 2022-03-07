@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core'
+import { FormBuilder, Validators } from '@angular/forms'
 import { IProduct } from 'src/app/models/IProduct'
+import { Order } from 'src/app/models/Order'
+import { OrderRows } from 'src/app/models/OrderRows'
+import { User } from 'src/app/models/User'
+import { GetdataService } from 'src/app/services/getdata.service'
 
 @Component({
   selector: 'app-shoppingcart',
@@ -8,48 +13,94 @@ import { IProduct } from 'src/app/models/IProduct'
 })
 export class ShoppingcartComponent implements OnInit {
   products: IProduct[] = []
-  amountNu: number = 1
+  userArray: User[] = []
+  userInfo: User = new User('', '', '', '', '', '', '', '')
   Price: number = 0
-  totalPNums: number = 0
+  orderRows: OrderRows[] = []
+  createOrder: Order = new Order(this.userInfo, this.Price, this.orderRows)
 
-  constructor() {}
+  amount: number = 0
+  done: boolean = false
+  show: boolean = false
+
+  userForm = this.fb.group({
+    firstName: ['', [Validators.required, Validators.minLength(2)]],
+    lastName: ['', [Validators.required, Validators.minLength(2)]],
+    street: ['', [Validators.required, Validators.minLength(3)]],
+    zip: ['', [Validators.required, Validators.minLength(5)]],
+    city: ['', [Validators.required, Validators.minLength(2)]],
+    country: ['', [Validators.required, Validators.minLength(2)]],
+    phoneNum: ['', [Validators.required, Validators.minLength(10)]],
+    email: ['', [Validators.required, Validators.minLength(2)]],
+  })
+
+  constructor(private fb: FormBuilder, private service: GetdataService) {}
 
   ngOnInit(): void {
     this.products = JSON.parse(localStorage.getItem('Order') || '[]')
-    this.totalPNums = JSON.parse(localStorage.getItem('totalPNums') || '[]')
+
+    if (localStorage.getItem('totalPrice')) {
+      this.Price = JSON.parse(localStorage.getItem('totalPrice') || '[]')
+    }
+
+    this.userInfo = JSON.parse(localStorage.getItem('myOrdercompanyUser') || '[]')
   }
 
-
-  // det funkar inte :( som det ska här ifrån
-  plus(price: number, inputNum: number) {
-    if (this.amountNu > 0) {
-      if (inputNum > 0) {
-        this.amountNu += inputNum
-      } else {
-        this.amountNu += 1
-      }
-      price = price * this.amountNu
-      this.Price = price
-      console.log(price)
-    }
-  }
-
-  minus(price: number, inputNum: number) {
-    if (this.amountNu > 0) {
-      this.amountNu -= inputNum
-    } else {
-      this.amountNu += +(-1);
-    }
-    this.Price -= price;
+  removeP(i: number, p: IProduct) {
+    this.Price = this.Price - p.price
+    localStorage.setItem('totalPrice', JSON.stringify(this.Price))
     console.log(this.Price)
+
+    this.products.splice(i, 1)
+    localStorage.setItem('Order', JSON.stringify(this.products))
+    this.service.amountInShopingsCArt(this.products.length)
   }
 
-  // tills hit
+  handleChange() {
+    this.getUser()
+    this.service.amountInShopingsCArt(0)
 
-  removeP(i: number) {
-    this.products.splice(i, 1)
-    localStorage.setItem('Order', JSON.stringify(this.products));
-    this.totalPNums += +(-1);
-    localStorage.setItem('totalPNums', JSON.stringify(this.totalPNums))
+    this.done = false
+    this.show = true
+
+    this.postData()
+    this.service.amountInShopingsCArt(0)
+    this.products = []
+    this.Price = 0
+    localStorage.removeItem('Order')
+    localStorage.removeItem('totalPrice')
+    localStorage.removeItem('PriceArr')
+  }
+
+  showUserForm() {
+    this.done = !this.done
+  }
+
+  postData() {
+    for (let el of this.products) {
+      this.orderRows.push(new OrderRows(el.id, 1))
+    }
+    this.createOrder = new Order(this.userInfo, this.Price, this.orderRows)
+    this.service.postData(this.createOrder)
+  }
+
+  getUser() {
+    const userInfo = this.userForm.value
+
+    const user: User = new User(
+      userInfo.firstName,
+      userInfo.lastName,
+      userInfo.street,
+      userInfo.zip,
+      userInfo.city,
+      userInfo.country,
+      userInfo.phoneNum,
+      userInfo.email,
+    )
+
+    this.userInfo = user
+    localStorage.setItem('myOrdercompanyUser', JSON.stringify(this.userInfo))
+
+    this.userForm.reset()
   }
 }

@@ -21,3 +21,35 @@ section {
     }
   }
 }
+
+section {
+  form {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 20px;
+
+  input {
+    min-width: 18rem;
+    padding: 4px;
+    margin: 8px;
+  }
+
+  button {
+    min-width: 19rem;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(90, 42, 80);
+      color: white;
+    }
+  }
+}
+
+}

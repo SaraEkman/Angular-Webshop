@@ -1,24 +1,24 @@
 import { OrderRows } from "./OrderRows";
-import { User } from "./user";
+import { User } from "./User";
 
 export class Order {
   id: number;
   companyId: number;
-  created: Date;
+  created: string;
   createdBy: string;
   paymentMethod: string;
   totalPrice: number;
   status: number;
   orderRows: OrderRows[];
-  constructor(user: User, tP: number, st: number, oR: OrderRows[]) {
-    let uniqeId = Math.floor(Math.random() * 100)
-    this.id = uniqeId;
+  constructor(user: User, totalPri: number, orderR: OrderRows[]) {
+
+    this.id = Number();
     this.companyId = 11;
-    this.created = new Date();
-    this.createdBy = user.firstName + ' ' + user.lastName + ' ' + user.city;
+    this.created = (new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]);
+    this.createdBy = user.firstName
     this.paymentMethod = "Paypal";
-    this.totalPrice = tP;
-    this.status = st;
-    this.orderRows = oR;
+    this.totalPrice = totalPri;
+    this.status = 0;
+    this.orderRows = orderR;
   }
 }

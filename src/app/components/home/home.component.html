@@ -1,4 +1,6 @@
 <section>
+  <input type="text">
+  <button (click)="searchMovis()">Sök</button>
   <article *ngFor="let p of products">
     <a routerLink="/details/{{p.id}}"><img [src]="p.imageUrl" alt="products" width="130px" height="auto">
     <h2>{{p.name}} </h2></a>

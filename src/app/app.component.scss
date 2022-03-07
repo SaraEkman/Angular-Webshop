@@ -8,10 +8,12 @@ header {
       justify-content: center;
       gap: 20px;
 
-      li {
+      a {
         text-decoration: none;
+        &.active {
+          text-decoration: underline;
+        }
       }
-
     }
   }
 }

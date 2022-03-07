@@ -2,16 +2,18 @@
   <nav>
     <ul>
       <li>
-        <a routerLink="">Hem</a>
+        <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Hem</a>
       </li>
       <li>
-        <a routerLink="/shoppingcart">Varukorg {{totalPNu}}</a>
+        <a routerLink="/shoppingcart" routerLinkActive="active">Varukorg
+          <p *ngIf="totalPNu > 0">{{totalPNu}}</p>
+          </a>
       </li>
       <li>
-        <a routerLink="/checkout">Checka ut</a>
+        <a routerLink="/checkout" routerLinkActive="active">Checka ut</a>
       </li>
       <li>
-        <a routerLink="/admin">Admin</a>
+        <a routerLink="/admin" routerLinkActive="active">Admin</a>
       </li>
     </ul>
   </nav>

@@ -1,1 +1,23 @@
-<p>admin works!</p>
+<article *ngFor="let o of finishedOrder.reverse(); let i = index" >
+<div *ngFor="let order of myOrdercompanyOrders.reverse()">
+
+    <div *ngIf="order.id === o.id">
+      <h2>OrderNummer: {{order.id}}</h2>
+
+      <div *ngFor="let r of order.orderRows">
+        <div *ngFor="let p of products">
+          <h3 *ngIf="r.productId===p.id">{{p.name}}</h3>
+          <h3 *ngIf="r.productId===p.id"> {{p.price}} </h3>
+        </div>
+      </div>
+
+      <h4> Betalningsätt: {{order.paymentMethod}}</h4>
+      <h4>Kundens namn: {{order.createdBy}}</h4>
+
+      <h4> Datum: {{order.created | date: "yyyy-MMMM-dd hh:mm"}}</h4>
+      <h4> Totalt: {{order.totalPrice}}kr </h4>
+
+      <button (click)="removeOrder(o.id, i)">Ta Bort</button>
+    </div>
+  </div>
+</article>
