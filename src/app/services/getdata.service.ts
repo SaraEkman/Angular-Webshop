@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs'
-import { environment } from 'src/environments/environment'
 import { ICategorySearch } from '../models/ICategorySearch'
 import { IProduct } from '../models/IProduct'
 import { Order } from '../models/Order'
@@ -32,20 +31,22 @@ export class GetdataService {
 
   constructor(private http: HttpClient) { }
 
+  //Det funkade inte med GitHub pages att ha länkarna i environment
+
   getCategory() {
-    this.http.get<ICategorySearch[]>(environment.CategoryApi).subscribe((data) =>{
+    this.http.get<ICategorySearch[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/categories').subscribe((data) =>{
       this.categoryApi.next(data)
     })
   }
 
   getData() {
-    this.http.get<IProduct[]>(environment.ApiProducts).subscribe((data) => {
+    this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/products').subscribe((data) => {
       this.products.next(data)
     })
   }
 
   searchTermFromUser(input: string) {
-    this.http.get<IProduct[]>(environment.searchApi + input).subscribe((data) => {
+    this.http.get<IProduct[]>("https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=" + input).subscribe((data) => {
       console.log(data);
       this.searchMovies.next(data)
     })
@@ -55,14 +56,14 @@ export class GetdataService {
     let httpOptions = new HttpHeaders()
     httpOptions.append('', 'aplication/json')
     return this.http
-      .post(environment.ApiOrder, order, { headers: httpOptions })
+      .post('https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order, { headers: httpOptions })
       .subscribe((result) => {
         console.log(result)
       })
   }
 
   getOrderApi() {
-    this.http.get<Order[]>(environment.MyOrdercompany).subscribe((data) => {
+    this.http.get<Order[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=11').subscribe((data) => {
       this.orderApiData.next(data)
     })
   }

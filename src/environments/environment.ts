@@ -4,11 +4,14 @@
 
 export const environment = {
   production: false,
-  ApiProducts: 'https://medieinstitutet-wie-products.azurewebsites.net/api/products',
-  ApiOrder: 'https://medieinstitutet-wie-products.azurewebsites.net/api/orders',
-  MyOrdercompany: 'https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=11',
-  CategoryApi: 'https://medieinstitutet-wie-products.azurewebsites.net/api/categories',
-  searchApi:"https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText="
+
+  //Det funkade inte med GitHub pages att ha länkarna här
+  
+  // ApiProducts: 'https://medieinstitutet-wie-products.azurewebsites.net/api/products',
+  // ApiOrder: 'https://medieinstitutet-wie-products.azurewebsites.net/api/orders',
+  // MyOrdercompany: 'https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=11',
+  // CategoryApi: 'https://medieinstitutet-wie-products.azurewebsites.net/api/categories',
+  // searchApi:"https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText="
 };
 
 /*
