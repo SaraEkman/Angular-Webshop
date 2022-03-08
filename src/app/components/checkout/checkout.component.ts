@@ -13,7 +13,8 @@ import { GetdataService } from 'src/app/services/getdata.service'
 export class CheckoutComponent implements OnInit {
   finishedOrder: Order[] = []
   products: IProduct[] = []
-  user: User = new User('', '', '', '', '', '', '', '','')
+  user: User = new User('', '', '', '', '', '', '', '', '')
+  show: boolean = false
 
   constructor(private service:GetdataService) {}
 
@@ -22,9 +23,14 @@ export class CheckoutComponent implements OnInit {
     this.service.getOrderApi()
     this.service.$orderApiData.subscribe((data)=>this.finishedOrder = data)
 
-    this.user = JSON.parse(localStorage.getItem('myOrdercompanyUser') || '[]')
+    this.user = JSON.parse(localStorage.getItem('User') || '[]')
 
     this.service.getData()
     this.service.$theData.subscribe((data)=>this.products=data)
+  }
+
+  removeUser() {
+    localStorage.removeItem('User')
+    this.show = true;
   }
 }

@@ -14,7 +14,7 @@ import { GetdataService } from 'src/app/services/getdata.service'
 export class ShoppingcartComponent implements OnInit {
   products: IProduct[] = []
   userArray: User[] = []
-  userInfo: User = new User('', '', '', '', '', '', '', '','')
+  userInfo: User = new User('', '', '', '', '', '', '', '', '')
   Price: number = 0
   orderRows: OrderRows[] = []
   createOrder: Order = new Order(this.userInfo, this.Price, this.orderRows)
@@ -31,7 +31,7 @@ export class ShoppingcartComponent implements OnInit {
     city: ['', [Validators.required, Validators.minLength(2)]],
     country: ['', [Validators.required, Validators.minLength(2)]],
     phoneNum: ['', [Validators.required, Validators.minLength(10)]],
-    email: ['', [Validators.required, Validators.minLength(2)]],
+    email: ['', [Validators.required, Validators.email]],
     paymentM: [''],
   })
 
@@ -39,14 +39,8 @@ export class ShoppingcartComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = JSON.parse(localStorage.getItem('Order') || '[]')
-
-    if (localStorage.getItem('totalPrice')) {
-      this.Price = JSON.parse(localStorage.getItem('totalPrice') || '[]')
-    }
-
-    this.userInfo = JSON.parse(
-      localStorage.getItem('myOrdercompanyUser') || '[]',
-    )
+    this.Price = JSON.parse(localStorage.getItem('totalPrice') || '[]')
+    this.userInfo = JSON.parse(localStorage.getItem('User') || '[]')
   }
 
   showUserForm() {
@@ -65,7 +59,7 @@ export class ShoppingcartComponent implements OnInit {
 
   getUser() {
     const userInfo = this.userForm.value
-    console.log(userInfo);
+    console.log(userInfo)
 
     this.userInfo = new User(
       userInfo.firstName,
@@ -76,10 +70,10 @@ export class ShoppingcartComponent implements OnInit {
       userInfo.country,
       userInfo.phoneNum,
       userInfo.email,
-      userInfo.paymentM
+      userInfo.paymentM,
     )
 
-    localStorage.setItem('myOrdercompanyUser', JSON.stringify(this.userInfo))
+    localStorage.setItem('User', JSON.stringify(this.userInfo))
 
     this.userForm.reset()
   }
@@ -88,7 +82,7 @@ export class ShoppingcartComponent implements OnInit {
     for (let el of this.products) {
       this.orderRows.push(new OrderRows(el.id, 1))
     }
-    this.createOrder = new Order(this.userInfo, this.Price, this.orderRows, )
+    this.createOrder = new Order(this.userInfo, this.Price, this.orderRows)
     this.service.postData(this.createOrder)
   }
 

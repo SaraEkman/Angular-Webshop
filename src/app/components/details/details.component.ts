@@ -12,6 +12,7 @@ export class DetailsComponent implements OnInit {
   PriceArr: number[] = []
   Price: number = 0
   productId: number = 0
+  products: IProduct[] = []
   product: IProduct = {
     id: 0,
     name: '',
@@ -31,20 +32,21 @@ export class DetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: GetdataService) {}
 
   ngOnInit(): void {
-    this.service.getData()
-    let products: IProduct[] = []
-    this.service.$theData.subscribe((data) => (products = data))
     this.route.params.subscribe((p) => {
-      products.map((getProduct) => {
-        if (getProduct.id == p['id']) {
-          this.productId = +p['id']
+      this.productId = +p['id']
+    })
+    this.service.getData()
+    this.service.$theData.subscribe((data) => {
+      this.products = data
+      this.products.map((getProduct) => {
+        if (getProduct.id == this.productId) {
           this.product = getProduct
         }
       })
     })
 
     this.Price = JSON.parse(localStorage.getItem('totalPrice') || '[]')
-    this.PriceArr = JSON.parse(localStorage.getItem('PriceArr')||'[]')
+    this.PriceArr = JSON.parse(localStorage.getItem('PriceArr') || '[]')
   }
 
   saveOrder() {
@@ -59,6 +61,5 @@ export class DetailsComponent implements OnInit {
     localStorage.setItem('PriceArr', JSON.stringify(this.PriceArr))
     this.Price = this.PriceArr.reduce((a, b) => a + b)
     localStorage.setItem('totalPrice', JSON.stringify(this.Price))
-
   }
 }

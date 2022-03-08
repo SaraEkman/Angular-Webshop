@@ -30,8 +30,6 @@ export class GetdataService {
   private searchMovies = new Subject<IProduct[]>()
   $searchMovies = this.searchMovies.asObservable()
 
-  orderArray: Object[] = JSON.parse(localStorage.getItem('finishedOrderU') || '[]')
-
   constructor(private http: HttpClient) { }
 
   getCategory() {
@@ -60,8 +58,6 @@ export class GetdataService {
       .post(environment.ApiOrder, order, { headers: httpOptions })
       .subscribe((result) => {
         console.log(result)
-        // this.orderArray.push(result)
-        // localStorage.setItem('finishedOrderU', JSON.stringify(this.orderArray))
       })
   }
 

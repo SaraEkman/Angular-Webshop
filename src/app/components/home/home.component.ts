@@ -28,19 +28,14 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.getCategory()
     this.service.getData()
-
     this.service.$theData.subscribe((data) => (this.products = data))
-
     this.orderP = this.getFromLocalStorage('Order')
-
     this.PriceArr = this.getFromLocalStorage('PriceArr')
     this.Price = this.getFromLocalStorage('totalPrice')
 
     this.service.$categoryApi.subscribe((cat) => {
-      console.log(cat);
       this.categorys = cat
     })
-
   }
 
   saveProduct(p: IProduct) {

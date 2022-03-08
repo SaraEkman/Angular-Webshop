@@ -10,25 +10,7 @@ import { GetdataService } from 'src/app/services/getdata.service'
 })
 export class AdminComponent implements OnInit {
   myOrdercompanyOrders: Order[] = []
-  // companyOrder: Order = new Order(new User('', '', '', '', '', '', '', ''),0,[])
-
   products: IProduct[] = []
-  // product: IProduct = {
-  //   id: 0,
-  //   name: '',
-  //   description: '',
-  //   price: 0,
-  //   imageUrl: '',
-  //   year: 0,
-  //   added: '',
-  //   productCategory: [],
-  // }
-
-  // finishedOrder: Order = new Order(new User('', '', '', '', '', '', '', ''),0,[])
-
-  // userArray :User[] = []
-
-
 
   constructor(private getOrderService: GetdataService) {}
 
