@@ -16,7 +16,7 @@ export class Order {
     this.companyId = 11;
     this.created = (new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]);
     this.createdBy = user.firstName
-    this.paymentMethod = "Paypal";
+    this.paymentMethod = user.paymentM;
     this.totalPrice = totalPri;
     this.status = 0;
     this.orderRows = orderR;

@@ -14,7 +14,7 @@ import { GetdataService } from 'src/app/services/getdata.service'
 export class ShoppingcartComponent implements OnInit {
   products: IProduct[] = []
   userArray: User[] = []
-  userInfo: User = new User('', '', '', '', '', '', '', '')
+  userInfo: User = new User('', '', '', '', '', '', '', '','')
   Price: number = 0
   orderRows: OrderRows[] = []
   createOrder: Order = new Order(this.userInfo, this.Price, this.orderRows)
@@ -32,6 +32,7 @@ export class ShoppingcartComponent implements OnInit {
     country: ['', [Validators.required, Validators.minLength(2)]],
     phoneNum: ['', [Validators.required, Validators.minLength(10)]],
     email: ['', [Validators.required, Validators.minLength(2)]],
+    paymentM: [''],
   })
 
   constructor(private fb: FormBuilder, private service: GetdataService) {}
@@ -43,7 +44,13 @@ export class ShoppingcartComponent implements OnInit {
       this.Price = JSON.parse(localStorage.getItem('totalPrice') || '[]')
     }
 
-    this.userInfo = JSON.parse(localStorage.getItem('myOrdercompanyUser') || '[]')
+    this.userInfo = JSON.parse(
+      localStorage.getItem('myOrdercompanyUser') || '[]',
+    )
+  }
+
+  showUserForm() {
+    this.done = !this.done
   }
 
   removeP(i: number, p: IProduct) {
@@ -56,38 +63,11 @@ export class ShoppingcartComponent implements OnInit {
     this.service.amountInShopingsCArt(this.products.length)
   }
 
-  handleChange() {
-    this.getUser()
-    this.service.amountInShopingsCArt(0)
-
-    this.done = false
-    this.show = true
-
-    this.postData()
-    this.service.amountInShopingsCArt(0)
-    this.products = []
-    this.Price = 0
-    localStorage.removeItem('Order')
-    localStorage.removeItem('totalPrice')
-    localStorage.removeItem('PriceArr')
-  }
-
-  showUserForm() {
-    this.done = !this.done
-  }
-
-  postData() {
-    for (let el of this.products) {
-      this.orderRows.push(new OrderRows(el.id, 1))
-    }
-    this.createOrder = new Order(this.userInfo, this.Price, this.orderRows)
-    this.service.postData(this.createOrder)
-  }
-
   getUser() {
     const userInfo = this.userForm.value
+    console.log(userInfo);
 
-    const user: User = new User(
+    this.userInfo = new User(
       userInfo.firstName,
       userInfo.lastName,
       userInfo.street,
@@ -96,11 +76,33 @@ export class ShoppingcartComponent implements OnInit {
       userInfo.country,
       userInfo.phoneNum,
       userInfo.email,
+      userInfo.paymentM
     )
 
-    this.userInfo = user
     localStorage.setItem('myOrdercompanyUser', JSON.stringify(this.userInfo))
 
     this.userForm.reset()
+  }
+
+  postData() {
+    for (let el of this.products) {
+      this.orderRows.push(new OrderRows(el.id, 1))
+    }
+    this.createOrder = new Order(this.userInfo, this.Price, this.orderRows, )
+    this.service.postData(this.createOrder)
+  }
+
+  handleChange() {
+    this.getUser()
+    this.service.amountInShopingsCArt(0)
+    this.done = false
+    this.show = true
+    this.postData()
+    this.service.amountInShopingsCArt(0)
+    this.products = []
+    this.Price = 0
+    localStorage.removeItem('Order')
+    localStorage.removeItem('totalPrice')
+    localStorage.removeItem('PriceArr')
   }
 }

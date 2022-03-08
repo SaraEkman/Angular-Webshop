@@ -10,29 +10,36 @@ import { GetdataService } from 'src/app/services/getdata.service'
 })
 export class HomeComponent implements OnInit {
 
-  category: ICategorySearch[] = []
+  categorys: ICategorySearch[] = []
   products: IProduct[] = []
+  filterProducts: IProduct[] = []
   orderP: IProduct[] = []
   PriceArr: number[] = []
   Price: number = 0
-
+  show: boolean = false;
+  inputValue: string = '';
+  searchMoviesProducts: IProduct[] = []
+  showMovies: boolean = false;
+  hidden: boolean = false
 
 
   constructor(private service: GetdataService) {}
 
   ngOnInit(): void {
-    this.service.getData()
     this.service.getCategory()
+    this.service.getData()
 
-    if (localStorage.getItem('Products')) {
-      this.products = this.getFromLocalStorage('Products')
-    } else {
-      this.service.$theData.subscribe((data) => (this.products = data))
-    }
+    this.service.$theData.subscribe((data) => (this.products = data))
+
     this.orderP = this.getFromLocalStorage('Order')
 
     this.PriceArr = this.getFromLocalStorage('PriceArr')
     this.Price = this.getFromLocalStorage('totalPrice')
+
+    this.service.$categoryApi.subscribe((cat) => {
+      console.log(cat);
+      this.categorys = cat
+    })
 
   }
 
@@ -50,8 +57,41 @@ export class HomeComponent implements OnInit {
     console.log(this.Price)
   }
 
+  filterMovies(name:string) {
+    this.filterProducts = []
+    this.show = true;
+    this.hidden = false
+    this.showMovies = false;
+    for (let c of this.categorys) {
+      if (name === c.name) {
+        for (let p of this.products) {
+          for (let cateId of p.productCategory) {
+            if (cateId.categoryId === c.id) {
+              this.filterProducts.push(p)
+          }
+        }
+      }
+      }
+    }
+  }
+
+  showAllProducts() {
+    this.show = false;
+    this.hidden = false
+    this.showMovies = false;
+  }
+
+  search(inputVa: string) {
+    this.inputValue = inputVa
+  }
+
   searchMovis() {
-    
+    this.showMovies = true;
+    this.hidden = true
+    this.service.searchTermFromUser(this.inputValue)
+    this.service.$searchMovies.subscribe((data) => {
+      this.searchMoviesProducts = data
+    })
   }
 
   getFromLocalStorage(name: string) {

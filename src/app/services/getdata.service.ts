@@ -24,25 +24,32 @@ export class GetdataService {
   private amountNum = new Subject<number>()
   $amountNum = this.amountNum.asObservable()
 
-  orderArray: Object[] = JSON.parse(localStorage.getItem('finishedOrderU') || '[]')
-
   private totalPrice = new Subject<number>()
   $totalPrice = this.totalPrice.asObservable()
+
+  private searchMovies = new Subject<IProduct[]>()
+  $searchMovies = this.searchMovies.asObservable()
+
+  orderArray: Object[] = JSON.parse(localStorage.getItem('finishedOrderU') || '[]')
 
   constructor(private http: HttpClient) { }
 
   getCategory() {
-    this.http.get<ICategorySearch[]>(environment.CategoryApi).subscribe((data) => {
-      console.log(data);
+    this.http.get<ICategorySearch[]>(environment.CategoryApi).subscribe((data) =>{
       this.categoryApi.next(data)
     })
   }
 
   getData() {
     this.http.get<IProduct[]>(environment.ApiProducts).subscribe((data) => {
-      // console.log(data)
       this.products.next(data)
-      localStorage.setItem('Products', JSON.stringify(data))
+    })
+  }
+
+  searchTermFromUser(input: string) {
+    this.http.get<IProduct[]>(environment.searchApi + input).subscribe((data) => {
+      console.log(data);
+      this.searchMovies.next(data)
     })
   }
 
@@ -53,8 +60,8 @@ export class GetdataService {
       .post(environment.ApiOrder, order, { headers: httpOptions })
       .subscribe((result) => {
         console.log(result)
-        this.orderArray.push(result)
-        localStorage.setItem('finishedOrderU', JSON.stringify(this.orderArray))
+        // this.orderArray.push(result)
+        // localStorage.setItem('finishedOrderU', JSON.stringify(this.orderArray))
       })
   }
 
@@ -75,6 +82,5 @@ export class GetdataService {
   amountInShopingsCArt(num: number) {
     this.amountNum.next(num)
   }
-
 
 }

@@ -76,6 +76,15 @@
       <div *ngIf="userForm.get('email')?.errors?.['minlength']">Minst två tecken</div>
     </div>
 
+    <label for="paymentMethod">Betalningsätt</label>
+    <select id="paymentMethod" formControlName="paymentM">
+      <option value="Swedbank">Swedbank</option>
+      <option value="Klarna">Klarna</option>
+      <option value="Shopify Payments">Shopify Payments</option>
+      <option value="Paypal">Paypal</option>
+      <option value="Swish">Swish</option>
+    </select>
+
     <button type="submit"[disabled]="!userForm.valid">Spara</button>
 
   </form>

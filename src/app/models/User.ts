@@ -1,12 +1,13 @@
 export class User {
   firstName: string;
   lastName: string;
-  street: string;;
+  street: string;
   zip: string;
   city: string;
   country: string;
   phoneNum: string;
   email: string;
+  paymentM: string;
 
   constructor(
     fN: string,
@@ -17,6 +18,7 @@ export class User {
     cou: string,
     pN: string,
     em: string,
+    pM:string
   ) {
     this.firstName = fN;
     this.lastName = lN;
@@ -26,5 +28,6 @@ export class User {
     this.country = cou;
     this.phoneNum = pN;
     this.email = em;
+    this.paymentM = pM;
   }
 }

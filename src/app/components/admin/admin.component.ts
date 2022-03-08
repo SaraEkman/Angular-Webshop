@@ -12,7 +12,6 @@ export class AdminComponent implements OnInit {
   myOrdercompanyOrders: Order[] = []
   // companyOrder: Order = new Order(new User('', '', '', '', '', '', '', ''),0,[])
 
-finishedOrder: Order[] = []
   products: IProduct[] = []
   // product: IProduct = {
   //   id: 0,
@@ -35,11 +34,9 @@ finishedOrder: Order[] = []
 
   ngOnInit(): void {
 
-    if (localStorage.getItem('Products')) {
-      this.products = JSON.parse(localStorage.getItem('Products') || '[]')
-    }
+    this.getOrderService.getData()
+    this.getOrderService.$theData.subscribe((data)=>this.products=data)
 
-     this.finishedOrder = JSON.parse(localStorage.getItem('finishedOrderU') || '[]')
 
 
     this.getOrderService.getOrderApi()
@@ -47,25 +44,9 @@ finishedOrder: Order[] = []
     this.getOrderService.$orderApiData.subscribe((data) => {
       this.myOrdercompanyOrders = data
     })
-
-
   }
 
-  // main() {
-  //   for (let p of this.products) {
-  //       this.product = p
-  //     }
-
-  //   for (let el of this.myCompanyOrder) {
-  //     this.companyOrder = el
-
-  //   }
-
-  // }
-
-  removeOrder(id: number, i: number) {
-    this.finishedOrder.splice(i,1)
-    localStorage.setItem('finishedOrderU',JSON.stringify(this.finishedOrder))
+  removeOrder(id: number) {
     this.getOrderService.deleteOrder(id);
   }
 }

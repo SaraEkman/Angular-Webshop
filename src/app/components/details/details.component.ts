@@ -31,9 +31,9 @@ export class DetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: GetdataService) {}
 
   ngOnInit(): void {
-    let products: IProduct[] = JSON.parse(
-      localStorage.getItem('Products') || '[]',
-    )
+    this.service.getData()
+    let products: IProduct[] = []
+    this.service.$theData.subscribe((data) => (products = data))
     this.route.params.subscribe((p) => {
       products.map((getProduct) => {
         if (getProduct.id == p['id']) {
@@ -59,6 +59,6 @@ export class DetailsComponent implements OnInit {
     localStorage.setItem('PriceArr', JSON.stringify(this.PriceArr))
     this.Price = this.PriceArr.reduce((a, b) => a + b)
     localStorage.setItem('totalPrice', JSON.stringify(this.Price))
-   
+
   }
 }

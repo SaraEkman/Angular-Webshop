@@ -1,9 +1,6 @@
-<article *ngFor="let o of finishedOrder.reverse(); let i = index" >
-<div *ngFor="let order of myOrdercompanyOrders.reverse()">
-
-    <div *ngIf="order.id === o.id">
+<article *ngFor="let order of myOrdercompanyOrders.reverse()">
+    <div >
       <h2>OrderNummer: {{order.id}}</h2>
-
       <div *ngFor="let r of order.orderRows">
         <div *ngFor="let p of products">
           <h3 *ngIf="r.productId===p.id">{{p.name}}</h3>
@@ -17,7 +14,6 @@
       <h4> Datum: {{order.created | date: "yyyy-MMMM-dd hh:mm"}}</h4>
       <h4> Totalt: {{order.totalPrice}}kr </h4>
 
-      <button (click)="removeOrder(o.id, i)">Ta Bort</button>
+      <button (click)="removeOrder(order.id)">Ta Bort</button>
     </div>
-  </div>
-</article>
+  </article>
