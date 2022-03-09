@@ -21,6 +21,14 @@ export class HomeComponent implements OnInit {
   searchMoviesProducts: IProduct[] = []
   showMovies: boolean = false;
   hidden: boolean = false
+  navigation: string = 'navigation'
+  btn: string = 'btn'
+  filter:string = 'filter'
+
+  // firstDiv:string = 'firstDiv'
+  // secondDiv:string = 'secondDiv'
+  // thirdDiv:string = 'thirdDiv'
+  divClass:string = 'classDiv'
 
 
   constructor(private service: GetdataService) {}

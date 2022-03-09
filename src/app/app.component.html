@@ -6,7 +6,7 @@
       </li>
       <li>
         <a routerLink="/shoppingcart" routerLinkActive="active">Varukorg
-          <p *ngIf="totalPNu > 0">{{totalPNu}}</p>
+          <p *ngIf="totalPNu > 0" [class]="amount">{{totalPNu}}</p>
           </a>
       </li>
       <li>

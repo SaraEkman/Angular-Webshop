@@ -1,5 +1,3 @@
-import { IProduct } from './IProduct'
-
 export class OrderRows {
   id: number
   productId: number
@@ -9,7 +7,7 @@ export class OrderRows {
   constructor(pI: number, amo: number) {
     this.id = Number()
     this.productId = pI
-    this.product = ""
+    this.product = ''
     this.amount = amo
     this.orderId = Number()
   }

@@ -1,45 +1,57 @@
 <section>
-  <article>
+  <article [class]="navigation">
     <input type="text" #searchTerm (input)="search(searchTerm.value)" />
-    <button (click)="searchMovis()">Sök</button>
+    <button (click)="searchMovis()">SÖK</button>
   </article>
 
-<article>
-    <button (click)="filterMovies('Action')">Action</button>
-    <button (click)="filterMovies('Thriller')">Thriller</button>
-    <button (click)="filterMovies('Comedy')">Comedy</button>
-    <button (click)="filterMovies('Sci-fi')">Sci-fi</button>
-    <button (click)="showAllProducts()">Visa Alla</button>
-</article>
-
-<div *ngIf="showMovies">
-  <article *ngFor="let p of searchMoviesProducts">
-    <a routerLink="/details/{{p.id}}"><img [src]="p.imageUrl" alt="products" width="130px" height="auto">
-      <h2>{{p.name}} </h2>
-    </a>
-    <button (click)="saveProduct(p)">Lägg i varukorg</button>
+  <article [class]="filter">
+    <button (click)="filterMovies('Action')">ACTION</button>
+    <button (click)="filterMovies('Thriller')">THRILLER</button>
+    <button (click)="filterMovies('Comedy')">COMEDY</button>
+    <button (click)="filterMovies('Sci-fi')">SCI_FI</button>
+    <button (click)="showAllProducts()">VISA ALLA</button>
   </article>
+
+  <div *ngIf="showMovies" [class]="divClass">
+    <article *ngFor="let p of searchMoviesProducts">
+      <a routerLink="/details/{{p.id}}"><img [src]="p.imageUrl" alt="products" width="130px" height="auto">
+      </a>
+      <div class="buttonContainer">
+        <a routerLink="/details/{{p.id}}">
+          <h2>{{p.name}} </h2>
+        </a>
+        <span>{{p.price}}kr</span>
+        <button (click)="saveProduct(p)" [class]="btn">LÄGG I KUNDKORG</button>
+      </div>
+    </article>
   </div>
 
   <div *ngIf="!hidden">
-
-  <div *ngIf="show">
-    <article *ngFor="let p of filterProducts">
-      <a routerLink="/details/{{p.id}}"><img [src]="p.imageUrl" alt="products" width="130px" height="auto">
-        <h2>{{p.name}} </h2>
-      </a>
-      <button (click)="saveProduct(p)">Lägg i varukorg</button>
-    </article>
+    <div *ngIf="show" [class]="divClass">
+      <article *ngFor="let p of filterProducts">
+        <a routerLink="/details/{{p.id}}"><img [src]="p.imageUrl" alt="products" width="130px" height="auto">
+        </a>
+        <div class="buttonContainer">
+          <a routerLink="/details/{{p.id}}">
+            <h2>{{p.name}} </h2>
+          </a>
+          <span>{{p.price}}kr</span>
+          <button (click)="saveProduct(p)" [class]="btn">LÄGG I KUNDKORG</button>
+        </div>
+      </article>
+    </div>
+    <div *ngIf="!show" [class]="divClass">
+      <article *ngFor="let p of products">
+        <a routerLink="/details/{{p.id}}"><img [src]="p.imageUrl" alt="products" width="130px" height="auto">
+        </a>
+        <div class="buttonContainer">
+          <a routerLink="/details/{{p.id}}"><h2>{{p.name}} </h2></a>
+          <!-- <h2>{{p.name}} </h2> -->
+          <span>{{p.price}}kr</span>
+          <button (click)="saveProduct(p)" [class]="btn">LÄGG I KUNDKORG</button>
+        </div>
+      </article>
+    </div>
   </div>
 
-  <div *ngIf="!show">
-    <article *ngFor="let p of products">
-      <a routerLink="/details/{{p.id}}"><img [src]="p.imageUrl" alt="products" width="130px" height="auto">
-        <h2>{{p.name}} </h2>
-      </a>
-      <button (click)="saveProduct(p)">Lägg i varukorg</button>
-    </article>
-  </div>
-
-  </div>
 </section>
