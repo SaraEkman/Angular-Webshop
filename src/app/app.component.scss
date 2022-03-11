@@ -12,10 +12,11 @@ header {
       margin: 0%;
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 40px;
+      // align-items: center;
+      gap: 50px;
       flex-wrap: wrap;
-
+      // padding-bottom: 10px;
+      // padding-top: 10px;
 
       a {
         color: #fff;
@@ -23,7 +24,6 @@ header {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-weight: 400;
         font-size: 20px;
-        transition: transform 0.2s;
 
         &.active {
           text-decoration: underline;
@@ -31,11 +31,9 @@ header {
         }
 
         .amount {
-          position: relative;
-          top: -35px;
-          left: 92px;
-          margin: 0%;
-          background-color:  #22599f;
+          margin: -45%;
+          margin-left: 66px;
+          background-color: #22599f;
           border-radius: 50%;
           width: 30px;
           padding: 3px;

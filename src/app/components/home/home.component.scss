@@ -6,10 +6,10 @@ section {
     padding: 10px 20px;
     background-color: #22599f;
     color: whitesmoke;
-    border-radius: 3px;
+    border-radius: 5px 0px 5px 0px;
     margin-top: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    transition: transform .2s;
+    // transition: transform .2s;
     font-weight: 400;
     font-size: 18px;
     &:hover {
@@ -36,6 +36,7 @@ section {
     }
   }
   .filter {
+    margin-bottom: 20px;
     button{
       margin: 20px 5px;
     }
@@ -117,7 +118,7 @@ section {
     }
 
     .navigation{
-      padding-top: 110px;
+      padding-top: 150px;
     }
   }
 }

@@ -16,12 +16,15 @@ export class ShoppingcartComponent implements OnInit {
   userArray: User[] = []
   userInfo: User = new User('', '', '', '', '', '', '', '', '')
   Price: number = 0
+  PriceArr: number[] = []
   orderRows: OrderRows[] = []
   createOrder: Order = new Order(this.userInfo, this.Price, this.orderRows)
 
   amount: number = 0
   done: boolean = false
   show: boolean = false
+  firstSection: string = 'firstSection'
+  continueBtn:string = 'continueBtn'
 
   userForm = this.fb.group({
     firstName: ['', [Validators.required, Validators.minLength(2)]],
@@ -41,6 +44,7 @@ export class ShoppingcartComponent implements OnInit {
     this.products = JSON.parse(localStorage.getItem('Order') || '[]')
     this.Price = JSON.parse(localStorage.getItem('totalPrice') || '[]')
     this.userInfo = JSON.parse(localStorage.getItem('User') || '[]')
+    this.PriceArr = JSON.parse(localStorage.getItem('PriceArr') || '[]')
   }
 
   showUserForm() {
@@ -50,7 +54,14 @@ export class ShoppingcartComponent implements OnInit {
   removeP(i: number, p: IProduct) {
     this.Price = this.Price - p.price
     localStorage.setItem('totalPrice', JSON.stringify(this.Price))
-    console.log(this.Price)
+    // console.log(this.Price)
+
+    for (let el = 0; el < this.PriceArr.length; el++) {
+      if (this.PriceArr[el] === p.price) {
+        this.PriceArr.splice(el, 1)
+        localStorage.setItem('PriceArr', JSON.stringify(this.PriceArr))
+      }
+    }
 
     this.products.splice(i, 1)
     localStorage.setItem('Order', JSON.stringify(this.products))

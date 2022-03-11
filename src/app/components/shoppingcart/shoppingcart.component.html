@@ -1,87 +1,89 @@
-<section>
-  <h2>Varukorg</h2>
-  <article *ngFor="let p of products let i = index">
-    <img [src]="p.imageUrl" alt="product" width="80px" height="auto">
-    <h3>{{p.name}} </h3>
-    <h4> {{p.price}} K</h4>
-    <button (click)="removeP(i,p)">Ta bort</button>
-  </article>
-  <p>Totalt, att betala {{Price}}</p>
-  <button (click)="showUserForm()" *ngIf=" products.length > 0">Fotsätt</button>
-</section>
+<div>
+  <section [class]="firstSection">
+    <h2>Kontrollera din beställning</h2>
+    <article *ngFor="let p of products let i = index">
+      <img [src]="p.imageUrl" alt="product" width="80px" height="auto">
+      <h3>{{p.name}} </h3>
+      <h4> {{p.price}} K</h4>
+      <button (click)="removeP(i,p)">Ta bort</button>
+    </article>
+    <p>Totalt, att betala {{Price}}Kr</p>
+    <button (click)="showUserForm()" *ngIf=" products.length > 0" [class]="continueBtn">Fotsätt</button>
+  </section>
 
-<section *ngIf="done">
-  <form [formGroup]="userForm" (ngSubmit)="handleChange()">
-    <input id="firstname" type="text" formControlName="firstName" placeholder="Förnamn">
+  <section *ngIf="done">
+    <form [formGroup]="userForm" (ngSubmit)="handleChange()">
+      <input id="firstname" type="text" formControlName="firstName" placeholder="Förnamn">
 
-    <div
-      *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched || userForm.get('firstName')?.dirty">
-      <div *ngIf="userForm.get('firstName')?.errors?.['required']">Obligatoriskt</div>
-      <div *ngIf="userForm.get('firstName')?.errors?.['minlength']">Minst två tecken</div>
-    </div>
+      <div
+        *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched || userForm.get('firstName')?.dirty">
+        <div *ngIf="userForm.get('firstName')?.errors?.['required']">Obligatoriskt</div>
+        <div *ngIf="userForm.get('firstName')?.errors?.['minlength']">Minst två tecken</div>
+      </div>
 
-    <input id="lastname" type="text" formControlName="lastName" placeholder="Efternamn">
+      <input id="lastname" type="text" formControlName="lastName" placeholder="Efternamn">
 
-    <div
-      *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched || userForm.get('lastName')?.dirty">
-      <div *ngIf="userForm.get('lastName')?.errors?.['required']">Obligatoriskt</div>
-      <div *ngIf="userForm.get('lastName')?.errors?.['minlength']">Minst två tecken</div>
-    </div>
+      <div
+        *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched || userForm.get('lastName')?.dirty">
+        <div *ngIf="userForm.get('lastName')?.errors?.['required']">Obligatoriskt</div>
+        <div *ngIf="userForm.get('lastName')?.errors?.['minlength']">Minst två tecken</div>
+      </div>
 
-    <input id="street" type="text" formControlName="street" placeholder="Gata">
+      <input id="street" type="text" formControlName="street" placeholder="Gata">
 
-    <div *ngIf="userForm.get('street')?.invalid && userForm.get('street')?.touched || userForm.get('street')?.dirty">
-      <div *ngIf="userForm.get('street')?.errors?.['required']">Obligatoriskt</div>
-      <div *ngIf="userForm.get('street')?.errors?.['minlength']">Minst tre tecken</div>
-    </div>
+      <div *ngIf="userForm.get('street')?.invalid && userForm.get('street')?.touched || userForm.get('street')?.dirty">
+        <div *ngIf="userForm.get('street')?.errors?.['required']">Obligatoriskt</div>
+        <div *ngIf="userForm.get('street')?.errors?.['minlength']">Minst tre tecken</div>
+      </div>
 
-    <input id="zip" type="text" formControlName="zip" placeholder="Postnummer">
+      <input id="zip" type="text" formControlName="zip" placeholder="Postnummer">
 
-    <div *ngIf="userForm.get('zip')?.invalid && userForm.get('zip')?.touched || userForm.get('zip')?.dirty">
-      <div *ngIf="userForm.get('zip')?.errors?.['required']">Obligatoriskt</div>
-      <div *ngIf="userForm.get('zip')?.errors?.['minlength']">Minst fem tecken</div>
-    </div>
+      <div *ngIf="userForm.get('zip')?.invalid && userForm.get('zip')?.touched || userForm.get('zip')?.dirty">
+        <div *ngIf="userForm.get('zip')?.errors?.['required']">Obligatoriskt</div>
+        <div *ngIf="userForm.get('zip')?.errors?.['minlength']">Minst fem tecken</div>
+      </div>
 
-    <input id="city" type="text" formControlName="city" placeholder="Stad">
+      <input id="city" type="text" formControlName="city" placeholder="Stad">
 
-    <div *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched || userForm.get('city')?.dirty">
-      <div *ngIf="userForm.get('city')?.errors?.['required']">Obligatoriskt</div>
-      <div *ngIf="userForm.get('city')?.errors?.['minlength']">Minst två tecken</div>
-    </div>
+      <div *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched || userForm.get('city')?.dirty">
+        <div *ngIf="userForm.get('city')?.errors?.['required']">Obligatoriskt</div>
+        <div *ngIf="userForm.get('city')?.errors?.['minlength']">Minst två tecken</div>
+      </div>
 
-    <input id="country" type="text" formControlName="country" placeholder="Land">
+      <input id="country" type="text" formControlName="country" placeholder="Land">
 
-    <div *ngIf="userForm.get('country')?.invalid && userForm.get('country')?.touched || userForm.get('country')?.dirty">
-      <div *ngIf="userForm.get('country')?.errors?.['required']">Obligatoriskt</div>
-      <div *ngIf="userForm.get('country')?.errors?.['minlength']">Minst två tecken</div>
-    </div>
+      <div *ngIf="userForm.get('country')?.invalid && userForm.get('country')?.touched || userForm.get('country')?.dirty">
+        <div *ngIf="userForm.get('country')?.errors?.['required']">Obligatoriskt</div>
+        <div *ngIf="userForm.get('country')?.errors?.['minlength']">Minst två tecken</div>
+      </div>
 
-    <input id="phoneNum" type="text" formControlName="phoneNum" placeholder="Telefonnummer">
+      <input id="phoneNum" type="text" formControlName="phoneNum" placeholder="Telefonnummer">
 
-    <div
-      *ngIf="userForm.get('phoneNum')?.invalid && userForm.get('phoneNum')?.touched || userForm.get('phoneNum')?.dirty">
-      <div *ngIf="userForm.get('phoneNum')?.errors?.['required']">Obligatoriskt</div>
-      <div *ngIf="userForm.get('phoneNum')?.errors?.['minlength']">Minst tio siffror</div>
-    </div>
+      <div
+        *ngIf="userForm.get('phoneNum')?.invalid && userForm.get('phoneNum')?.touched || userForm.get('phoneNum')?.dirty">
+        <div *ngIf="userForm.get('phoneNum')?.errors?.['required']">Obligatoriskt</div>
+        <div *ngIf="userForm.get('phoneNum')?.errors?.['minlength']">Minst tio siffror</div>
+      </div>
 
-    <input id="email" type="text" formControlName="email" placeholder="Email">
+      <input id="email" type="text" formControlName="email" placeholder="Email">
 
-    <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched || userForm.get('email')?.dirty">
-      <div *ngIf="userForm.get('email')?.errors?.['required']">Obligatoriskt</div>
-      <div *ngIf="userForm.get('email')?.errors?.['email']">korrekt format</div>
-    </div>
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched || userForm.get('email')?.dirty">
+        <div *ngIf="userForm.get('email')?.errors?.['required']">Obligatoriskt</div>
+        <div *ngIf="userForm.get('email')?.errors?.['email']">korrekt format</div>
+      </div>
 
-    <label for="paymentMethod">Betalningsätt</label>
-    <select id="paymentMethod" formControlName="paymentM">
-      <option value="Swedbank">Swedbank</option>
-      <option value="Klarna">Klarna</option>
-      <option value="Shopify Payments">Shopify Payments</option>
-      <option value="Paypal">Paypal</option>
-      <option value="Swish">Swish</option>
-    </select>
+      <label for="paymentMethod">Betalningsätt</label>
+      <select id="paymentMethod" formControlName="paymentM">
+        <option value="Swedbank">Swedbank</option>
+        <option value="Klarna">Klarna</option>
+        <option value="Shopify Payments">Shopify Payments</option>
+        <option value="Paypal">Paypal</option>
+        <option value="Swish">Swish</option>
+      </select>
 
-    <button type="submit" [disabled]="!userForm.valid">Spara</button>
+      <button type="submit" [disabled]="!userForm.valid">Spara</button>
 
-  </form>
-</section>
-<a routerLink="/checkout" *ngIf="show"><button>checka ut</button></a>
+    </form>
+  </section>
+  <a routerLink="/checkout" *ngIf="show"><button>checka ut</button></a>
+</div>
