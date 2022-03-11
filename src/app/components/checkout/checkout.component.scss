@@ -1,5 +1,5 @@
 .container {
-  padding-top: 150px;
+  padding-top: 100px;
   color: #fff;
   background: #000;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -37,9 +37,25 @@
         font-size: 20px;
       }
 
-      article {
+      > article {
+        width: 100%;
+        color: #000;
         article {
           div {
+            border-radius: 4px;
+            background: #fff;
+            padding: 10px;
+            margin: 20px 0px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            p {
+              font-size: 20px;
+            }
+
             img {
               width: 20% !important;
               height: auto !important;

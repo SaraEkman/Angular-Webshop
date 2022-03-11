@@ -69,7 +69,7 @@
 
       <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched || userForm.get('email')?.dirty">
         <div *ngIf="userForm.get('email')?.errors?.['required']">Obligatoriskt</div>
-        <div *ngIf="userForm.get('email')?.errors?.['email']">korrekt format</div>
+        <div *ngIf="userForm.get('email')?.errors?.['email']">Fel format</div>
       </div>
 
       <label for="paymentMethod">Betalningsätt</label>

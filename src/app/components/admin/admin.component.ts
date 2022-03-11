@@ -11,6 +11,7 @@ import { GetdataService } from 'src/app/services/getdata.service'
 export class AdminComponent implements OnInit {
   myOrdercompanyOrders: Order[] = []
   products: IProduct[] = []
+  adminOrderWrapper: string = "adminOrderWrapper"
 
   constructor(private getOrderService: GetdataService) {}
 

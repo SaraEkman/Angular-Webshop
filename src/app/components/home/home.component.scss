@@ -7,11 +7,12 @@ section {
     background-color: #22599f;
     color: whitesmoke;
     border-radius: 5px 0px 5px 0px;
-    margin-top: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     // transition: transform .2s;
     font-weight: 400;
     font-size: 18px;
+    margin: 6px !important;
+    margin-bottom: 0px !important;
     &:hover {
       cursor: pointer;
       background: lighten(#22599f, 10%);
@@ -23,16 +24,29 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    margin: 0px 8px 20px 8px;
-    padding-top: 180px;
+    padding-top: 100px;
+    width: 100%;
 
     input {
-      padding: 14px 70px 5px 70px;
+      height: 41px;
+      border-radius: 4px 0px 0px 4px;
+      box-sizing: border-box;
+      border: 0px;
+      width: 80%;
+      margin-left: 10px;
+      max-width: 575px;
     }
     button{
-      padding: 6px 25px 6px 25px;
-      margin: 5px;
+      height: 41px;
+      border-radius: 0px 4px 4px 0px;
+      box-sizing: border-box;
+      margin: 0px 10px 0px 0px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0px;
+      width: 80px;
+      margin-right: 10px;
     }
   }
   .filter {
@@ -59,6 +73,10 @@ section {
 
       .buttonContainer {
         height: 200px;
+
+        h2 {
+          font-size: 20px;
+        }
       }
     }
     a {
@@ -118,7 +136,7 @@ section {
     }
 
     .navigation{
-      padding-top: 150px;
+      padding-top: 100px;
     }
   }
 }

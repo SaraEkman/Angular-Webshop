@@ -1,5 +1,6 @@
-<article *ngFor="let order of myOrdercompanyOrders.reverse()">
-    <div >
+<div [class]="adminOrderWrapper">
+  <article *ngFor="let order of myOrdercompanyOrders.reverse()">
+    <div>
       <h2>OrderNummer: {{order.id}}</h2>
       <div *ngFor="let r of order.orderRows">
         <div *ngFor="let p of products">
@@ -17,3 +18,4 @@
       <button (click)="removeOrder(order.id)">Ta Bort</button>
     </div>
   </article>
+</div>
