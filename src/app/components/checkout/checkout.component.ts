@@ -15,6 +15,8 @@ export class CheckoutComponent implements OnInit {
   products: IProduct[] = []
   user: User = new User('', '', '', '', '', '', '', '', '')
   show: boolean = false
+  container: string = 'container'
+  div: string = 'div'
 
   constructor(private service:GetdataService) {}
 

@@ -1,18 +1,14 @@
-<div *ngIf="!show">
+<div *ngIf="!show" [class]="container">
   <section *ngFor="let order of finishedOrder">
     <article *ngIf="order.createdBy === user.firstName">
-
-      <h1>Din Ordernummer är {{order.id}} </h1>
-      <h2> {{order.createdBy}} </h2>
-      <article *ngFor="let row of order.orderRows">
-
-        {{row.productId}}
+      <h1>Tack för din beställning, din Ordernummer är {{order.id}} </h1>
+      <h3>Namn: {{order.createdBy}} </h3>
+      <article *ngFor="let row of order.orderRows">Producter
         <article *ngFor="let p of products">
-          <div *ngIf="p.id === row.productId">
+          <div *ngIf="p.id === row.productId" [class]="div">
             <img [src]="p.imageUrl" alt="product" width="auto" height="80px">
-            <p>productId: {{p.id}}</p>
             <p>Product: {{p.name}}</p>
-            <p>Product: {{p.price}}</p>
+            <p>Price: {{p.price}}</p>
           </div>
         </article>
       </article>
