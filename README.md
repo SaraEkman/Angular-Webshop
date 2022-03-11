@@ -1,3 +1,3 @@
 #Angular Webshop 
 ## Link to GitHub pages 
-(URL)[]
+(URL)[https://saraekman.github.io/Angular-Webshop/]
